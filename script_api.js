@@ -1,7 +1,12 @@
 // 페이지가 로드되면 API를 통해 뉴스를 가져와서 화면에 표시
 document.addEventListener('DOMContentLoaded', () => {
     // 1. 우리 백엔드 서버에 F1 뉴스 데이터를 요청한다.
-    fetch('http://localhost:8080/api/news') // 백엔드 API 주소
+
+    //수정 전
+    //fetch('http://localhost:8080/api/news') // 백엔드 API 주소
+
+    //수정 후 (배포 이후)
+    fetch('http://for-1-backend.ap-northeast-2.elasticbeanstalk.com/api/news') //벡엔드 서버주소로 변경
         .then(response => response.json()) // 2. 받아온 응답을 JSON 형태로 변환한다.
         .then(data => {
             // 3. 성공적으로 데이터를 받아오면, displayNews 함수를 호출한다.
@@ -24,9 +29,8 @@ function displayNews(newsData) {
                 <img src="${news.imageUrl}" alt="${news.translatedTitle}" class="card-image">
                 <div class="card-content">
                     <h2>${news.translatedTitle}</h2>
-                    <%-- <p>${news.summary}</p> --%>  <%-- 현재 API에 요약 정보가 없으므로 주석 처리 --%>
                     <div class="card-footer">
-                        <span>${news.createdAt.substring(0, 10)}</span> <%-- 날짜만 표시 --%>
+                        <span>${news.createdAt.substring(0, 10)}</span> 
                     </div>
                 </div>
             </a>
